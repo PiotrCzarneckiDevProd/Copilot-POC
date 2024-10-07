@@ -1,0 +1,49 @@
+Use Case,Issue,Action,Params by user,Params by BOT,API Output,Type,Integration,Remote Action API ID,Timeout (seconds),Description
+,,Get Device Collector UID info for any Remote action API call,,NQL ID and Device Hostname,UID,Process,,,,Integration in Nexthink for device collector
+Application Deployment,Issue with SCCM client,Get Configuration Manager (SCCM) client status,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,get_configuration_manager_sccm_client_status,120,"Gets Configuration Manager (SCCM) client services status (SMS Agent, BITS, WMI, etc.) and information about SCCM client on devices."
+,Remediate SCCM client by repairing,Invoke Configuration Manager SCCM Client Auto-Repair,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,"	
+invoke_configuration_manager_sccm_client_auto_repair",1080,Executes the Configuration Manager repair based on Microsoft's script center recommendations.
+,Remediate the SCCM services,Repair WMI,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,"	
+ repair_wmi_windows",120,"Checks if the Winmgmt service is set to start automatically, if not, set its start type as automatic. Also checks if the Winmgmt service is running, if not, it tries to start it. It also tries to repair the WMI repository if it is on a non consistent status."
+,Remediate the SCCM client by installing it,Install Configuration Manager client,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,"	
+install_configuration_manager_sccm_client",600,Installs Microsoft Configuration Manager (SCCM) client in the target machine.
+PC Performance,"performance, cleanup of recycle bin",Invoke recycle bin cleanup,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,"	
+ invoke_recycle_bin_cleanup",1200,This Remote Action helps to conserve disk space on end-user devices by performing a proactive recycle bin clean (compatible on Windows or macOS) with an optional capability to use a Campaign to request user permission. 
+,disk health,Get disk health,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink, get_disk_health_windows,120,Gets physical disk health details where the drive is located (identified by a given drive letter).
+,cleanup disk,Disk cleanup,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink, disk_cleanup,720,"This Remote Action is designed to help employees to maintain healthy levels of disk space.  It can be used in 2 different formats, either with the Campaign which will provide some information to the employee with the option of a light or deep clean, which the employee can select.  Without the campaign, administrators can use the Remote Action to automatically clean the disk according to the input parameter options they supply (Light or Deep). "
+Outlook,"plugin, crash, not opening",Get Outlook plugins,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink, get_outlook_plugins_windows,120,Retrieves the installed Microsoft Office Outlook COM Add-ins sorted by status and name.
+,"plugin, crash, not opening",Get Outlook plugin crash details,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,get_outlook_plugin_crash_details_windows,120,"Retrieves details of Microsoft Outlook plugin crashes, with the focus on the most recent. Scope is limited by the company policy to control Event Log, which serves as a source of information."
+,"plugin, crash, not opening",Set Outlook plugins,,"NQL ID of the Remote Action and Device Collector UID, Plugin Name",Request ID,Remediation,Nexthink, set_outlook_plugins_windows,720,"Enables or disables each Microsoft Office Outlook COM add-in specified in the parameters. The names of the available add-ins can be found by running the 'Get Outlook Plugins' Remote Action.
+Campaign can be skipped by providing an empty ID as input CampaignId."
+,"emails not sent, send or receive, storage, full emails",Get Outlook storage info,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,"	
+ get_outlook_storage_info_windows",120,"Obtains the number of PST and OST files a user has connected to Outlook, and their overall size."
+,send or receive,Repair Outlook OST problems,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink, repair_outlook_ost_problem_windows,120,Repairs Outlook problems with OST file by deleting it and restarting Outlook. Runs a campaign to close applications blocking OST file (Outlook and Teams). The script is designed for Windows 10 and Outlook 2010 onwards.
+Microsoft Teams,Teams app,Get Microsoft Teams Work or School client status,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,get_microsoft_teams_work_or_school_client_status,120,"This Remote Action helps organizations gain deeper visibility into their 'Microsoft Teams Work or School' edition endpoint compliance state.
+
+The Remote Action makes it possible to understand any occurrences where Microsoft Teams is not installed on a device. Where Teams is installed on a device we give insights into the number of months since Microsoft Teams was updated."
+,"call quality, video quality, network",Invoke Network Assessment Tool,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,"	
+invoke_network_assessment_tool_windows",720,"Using Microsoft Teams Network Assessment Tool connects to nearby Microsoft node to test voice call quality (round trip time, jitter, packet loss rate).
+Results are calculated based on 90 percentile of values per metric.
+Tool is applicable for quality test of Microsoft Teams."
+,teams resinstall,Reinstall Microsoft Teams Work or School Windows Chatbot,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink,#reinstall_microsoft_teams_work_or_school_windows_chatbot,900,"Please note that this Remote Action is only supported on the latest Teams version 'Microsoft Teams Work or School' for Microsoft Windows.
+
+The Remote Action is used to either install Teams Work or School (the latest version), or reinstall Microsoft Teams Work or School.
+
+The Remote Action can be used in troubleshooting scenarios where you wish to perform a reinstallation of Teams on an employee's device, or for example to avoid version disparity across the organization."
+OneDrive,storage,Get OneDrive client status,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,get_onedrive_status,120,Checks if OneDrive application is working properly.
+,sync,Repair OneDrive client Windows,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink, repair_onedrive_windows(),1080,"Performs a OneDrive repair or reinstallation on the device, mitigating possible sync issues.
+
+'''''Warning:''' This Remote Action simultaneously downloads and installs the latest version of Microsoft OneDrive on all targeted devices. Please ensure that the available network capacity is appropriate for the number of targeted devices.''"
+,sync,Get OneDrive client sync status,,NQL ID of the Remote Action and Device Collector UID,Request ID,Diagnostic,Nexthink,get_onedrive_sync_status_windows,120,Gathers OneDrive sync status from the business accounts SyncDiagnostics.log.
+,,Reset OneDrive chatbot,,NQL ID of the Remote Action and Device Collector UID,Request ID,Remediation,Nexthink, #reset_one_drive_chatbot,120,"This Remote Action can assist in scenarios whereby OneDrive is failing to synchronize. It restarts the OneDrive client which is used to synchronize files and folders.
+OneDrive will attempt to perform a synchronization after the restart."
+,,Get Result (Diagnostic),,Request ID,Output parameters of respective NQLs,Process,Nexthink,,,
+,,Get Result (Remediation),,Request ID,Success/Failure,Process,Nexthink,,,
+,,NA,User email ID,,Hostname & Refresh Date,Process,AMI,,,
+,,,User email ID,,User details,Conditional,Entra ID,,,
+,,GET list of exisiting open tickets of the user,User email ID,"Service, Intent",List of open incidents,Process,SNOW ,,,
+,,CREATE tickets for the user,"Affected User email ID, Description of the incident","Service, User, Impact, Urgency, Short Description, Description as a summary, Assignment group, contact type, correlation ID","Incident Number, sys ID",Process,SNOW ,,,
+,,UPDATE tickets for the user,,"State, Worknotes, Assignment Group, Service Offering",,Process,SNOW ,,,
+,,RESOLVE tickets for the user,,"Configuration Item, Category, Sub category, Cause Code, State, Assigned To, Resolution Code, Resolution Notes, SLA Breach Reason, Other reason, please specify",,Process,SNOW ,,,
+,,"Get Inputs for Incident Create, Update and Resolve",,"Use case, scenario",Inputs for SNOW APIs for respective use case scenario,Process,Dataverse,,,
+,,Feedback gathering from user,Feedback,User email ID,NA,Conditional,Dataverse,,,

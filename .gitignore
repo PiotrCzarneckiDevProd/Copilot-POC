@@ -1,0 +1,9 @@
+*.log
+*.tmp
+/node_modules
+/venv
+/.vscode
+/__pycache__
+.env
+config.py
+Thumbs.db

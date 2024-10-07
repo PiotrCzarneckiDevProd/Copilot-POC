@@ -1,0 +1,17 @@
+{
+    "AZURE_API_KEY": "-",
+    "AZURE_API_VERSION": "2024-05-01-preview",
+    "AZURE_ENDPOINT": "-",
+    "ASSISTANT_NAME": "File Analyst Assistant POC v1.3",
+    "ASSISTANT_INSTRUCTIONS": "tell me smth about the weather",
+    "ASSISTANT_MODEL": "gpt-4o_standard",
+    "FILE_PATHS": ["-"],
+  "METADATA": {
+      "created_by": "Piotr Czarnecki",
+      "department": "Data Science n Data Engineering",
+      "project": "POC AI Assistant",
+      "date_created": "2024-10-02"
+  }
+}
+
+
